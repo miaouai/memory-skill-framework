@@ -1,7 +1,20 @@
 ---
 name: memory-skill-framework
+version: 1.0.0
 description: AI Agent 记忆系统 - 模块化记忆管理框架，支持长期持久化记忆、情境日志和语义搜索
-metadata: { "copaw": { "emoji": "🧠" } }
+kind: module
+author: miaouai
+category: Infrastructure
+trustScore: 95
+permissions:
+  fileRead: true
+  fileWrite: true
+  network: false
+  shell: true
+metadata:
+  copaw:
+    emoji: "🧠"
+    trigger: "记忆"
 ---
 
 # AI Agent 记忆系统 - 模块化记忆管理框架
