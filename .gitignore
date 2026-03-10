@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Memory working copies (real data - NOT to be committed)
+memory/data/*.json.backup
+memory/episodic/*
+memory/working/*
+memory/self-improvement/*
+**/.env
+**/envs.json
+**/*.pem
+**/.ssh/
+
+# Logs
+logs/
+*.log
+
+# Generated files
+MEMORY.md
+memory/generate/*.md

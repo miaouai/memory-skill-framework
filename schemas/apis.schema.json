@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/miaouai/memory-skill-framework/main/schemas/apis.schema.json",
+  "title": "APIs Configuration Module",
+  "description": "Schema for memory/data/apis.json - stores external API credentials, endpoints and rate limits",
+  
+  "type": "object",
+  "allOf": [{"$ref": "memory-module.schema.json"}],
+  
+  "required": ["version", "last_updated", "apis"],
+  
+  "properties": {
+    "apis": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["platform", "base_url"],
+        "properties": {
+          "platform": {
+            "type": "string",
+            "description": "Platform name (e.g., 'ModelScope AI Platform', '火山引擎 ModelArk')"
+          },
+          "base_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Primary API endpoint"
+          },
+          "rate_limit": {
+            "type": "string",
+            "description": "Rate limit description (e.g., '2000 calls/day user limit')"
+          },
+          "auth_method": {
+            "type": "string",
+            "enum": ["bearer_token", "api_key_header", "oauth2", "basic_auth"],
+            "description": "Authentication method required"
+          },
+          "token_env": {
+            "type": "string",
+            "pattern": "^[A-Z_]+$",
+            "description": "Environment variable name containing the full token/secret"
+          },
+          "recommended_models": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Suggested model IDs to use with this API"
+          }
+        }
+      }
+    },
+    
+    "fallback_chains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "for_task_type": {"type": "string"},
+          "priority_order": {
+            "type": "array",
+            "items": {"type": "string", "minLength": 1}
+          },
+          "notes": {"type": "string"}
+        }
+      },
+      "description": "Failover strategy: try API-A first, fall back to API-B if fails"
+    },
+    
+    "_security_note": {
+      "type": "string",
+      "const": "Full tokens are stored in /app/working.secret/envs.json, not here. Only env var names!"
+    }
+  }
+}
