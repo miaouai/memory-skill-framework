@@ -1,69 +1,69 @@
-# 🧠 AI Agent Memory System
+# AI Agent 记忆系统 - 模块化记忆管理框架
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-green.svg)](https://www.python.org/downloads/)
-[![CoPaw Compatible](https://img.shields.io/badge/CoPaw-compatible-brightgreen)](https://github.com/miaouai/copaw)
+[![CoPaw 兼容](https://img.shields.io/badge/CoPaw-兼容-brightgreen)](https://github.com/miaouai/copaw)
 
-> **Production-ready multi-layer memory framework for LLM agents**  
-> Supports long-term persistent memory, episodic logging, and semantic search optimization.  
-> *Based on battle-tested architecture from the [喵有爱 (miaouai)](https://github.com/miaouai) agent ecosystem.*
-
----
-
-## 📖 Documentation
-
-- **[SKILL.md](SKILL.md)** — Technical specification for skill integration
-- **[README-CN.md](README-CN.md)** — 中文详细使用手册 (Chinese manual)
-- **[examples/minimal-agent.py](examples/minimal-agent.py)** — Standalone demo script
-- **[schemas/](schemas/)** — JSON Schema definitions for validation
+> **生产级的 LLM 代理多层记忆框架**  
+> 支持长期持久化记忆、情境日志记录和语义搜索优化。  
+> *基于 [喵有爱 (miaouai)](https://github.com/miaouai) 代理生态系统的实战架构*
 
 ---
 
-## 🎯 Features
+## 📖 文档导航
 
-### Core Capabilities
-
-- ✅ **Hierarchical Storage** — Separated data modules, episodic logs, and working memory cache
-- ✅ **Version Control Ready** — All config files are plain JSON with semantic versioning
-- ✅ **Security First** — Zero hardcoded secrets; environment variable-based credential management
-- ✅ **Incremental Updates** — Hot-swap modules without full reloads
-- ✅ **Cross-Session Persistence** — Survive reboots with disk-backed atomic commits
-
-### Use Cases
-
-1. **Task Automation Agents** — Remember multi-step procedures across runs
-2. **Error Recovery** — Learn from past failures and auto-suggest fixes
-3. **Knowledge Base Construction** — Build personal/domain-specific expertise over time
-4. **Multi-Agent Collaboration** — Share contextual memory pools between agents
+- **[SKILL.md](SKILL.md)** — 技能集成技术规格书
+- **[README-CN.md](README-CN.md)** — 详细使用手册
+- **[examples/minimal-agent.py](examples/minimal-agent.py)** — 独立运行示例脚本
+- **[schemas/](schemas/)** — JSON Schema 校验定义
 
 ---
 
-## 🏗️ Architecture Overview
+## 🎯 核心功能
+
+### 主要能力
+
+- ✅ **分层存储** — 分离数据模块、情境日志和工作记忆缓存
+- ✅ **版本控制友好** — 所有配置文件均为纯 JSON，支持语义化版本管理
+- ✅ **安全第一** — 零硬编码密钥；基于环境变量的凭据管理
+- ✅ **增量更新** — 热切换模块无需全量重载
+- ✅ **跨会话持久化** — 磁盘原子提交，重启不丢失状态
+
+### 适用场景
+
+1. **任务自动化代理** — 跨运行保持多步骤流程记忆
+2. **错误恢复学习** — 从历史失败中学习并自动推荐修复方案
+3. **知识库构建** — 随时间积累个人或领域专用知识
+4. **多代理协作** — 在多个代理间共享上下文记忆池
+
+---
+
+## 🏗️ 系统架构概览
 
 ```
-memory/                          # Root directory
-├── data/                        # Structured core knowledge (JSON)
-│   ├── apis.json                # API credentials & endpoints
-│   ├── profiles.json            # Identity & user preferences  
-│   ├── network.json             # Proxy rules
-│   ├── tasks.json               # Task workflow templates
-│   ├── error-patterns.json      # Known failure modes
-│   └── security-guide.json     # Access control policies
+memory/                          # 记忆根目录
+├── data/                        # 结构化核心知识 (JSON 格式)
+│   ├── apis.json                # API 凭据与端点配置
+│   ├── profiles.json            # 身份标识与用户偏好  
+│   ├── network.json             # 代理规则设置
+│   ├── tasks.json               # 任务工作流模板
+│   ├── error-patterns.json      # 已知故障模式库
+│   └── security-guide.json     # 访问控制策略
 │
-├── episodic/                    # Time-indexed event logs
-│   └── YYYY-MM-DD-xxxx.json    # Date-sharded records
+├── episodic/                    # 时序事件日志
+│   └── YYYY-MM-DD-xxxx.json    # 按日期分片的记录
 │
-├── working/                     # Active session state
+├── working/                     # 活跃会话状态
 │   └── current_session.json    
 │
-└── index/                       # Fast lookup tables
+└── index/                       # 快速查找索引表
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Option A: Copy to Your Project
+### 方式 A: 复制到你的项目
 
 ```bash
 cd /path/to/your/project
@@ -71,21 +71,21 @@ git clone https://github.com/miaouai/memory-skill-framework.git memory
 source memory/scripts/setup_env.sh
 ```
 
-### Option B: Minimal Usage Example
+### 方式 B: 最小化使用示例
 
 ```python
 from examples.minimal_agent import MinimalAgentWithMemory
 
-# Initialize agent with memory
+# 初始化带记忆的代理
 agent = MinimalAgentWithMemory("/app/working/memory")
 
-# Load existing knowledge module
+# 加载已有知识模块
 api_config = agent.load_module("apis")
-print(f"Available APIs: {list(api_config['apis'].keys())}")
+print(f"可用 APIs: {list(api_config['apis'].keys())}")
 
-# Log new experience
+# 保存新经历
 episode_id = agent.save_episode(
-    title="First deployment attempt",
+    title="首次部署尝试",
     category="production",
     details={"result": "success", "duration_ms": 1200},
     outcome_status="completed"
@@ -94,33 +94,33 @@ episode_id = agent.save_episode(
 
 ---
 
-## 🔒 Security Best Practices
+## 🔒 安全最佳实践
 
-This framework is designed with defense-in-depth:
+本框架采用纵深防御设计：
 
-| Zone | Location | Permissions |
-|------|----------|-------------|
-| Public docs | `*.md`, `examples/` | rwxr-xr-x |
-| Private workspace | `mycopaw/projects/` | rwx------ |
-| Credential vault | `/app/working.secret/envs.json` | rw------- |
+| 区域 | 位置 | 权限建议 |
+|------|------|----------|
+| 公共文档 | `*.md`, `examples/` | rwxr-xr-x |
+| 私有工作区 | `mycopaw/projects/` | rwx------ |
+| 凭证保险库 | `/app/working.secret/envs.json` | rw------- |
 
-✅ **Red Team Audit Completed**: No PII or hardcoded secrets in repo.
+✅ **红队审计已完成**: 仓库中无个人身份信息或硬编码密钥。
 
 ---
 
-## 🛠️ Toolchain
+## 🛠️ 工具链
 
-### Sync Script (Generate Human-Readable MEMORY.md)
+### 同步脚本 (生成人类可读的 MEMORY.md)
 
 ```bash
 python scripts/sync_memory.py
-# → Outputs: ../MEMORY.md (convenience view of all data/*.json)
+# → 输出：../MEMORY.md (所有 data/*.json 的便捷视图)
 ```
 
-### Schema Validation
+### Schema 校验
 
 ```bash
-# Install jsonschema first
+# 先安装 jsonschema
 pip install jsonschema
 
 jsonschema -i memory/data/apis.json schemas/apis.schema.json
@@ -128,39 +128,39 @@ jsonschema -i memory/data/apis.json schemas/apis.schema.json
 
 ---
 
-## 📊 Performance Benchmarks
+## 📊 性能指标对比
 
-| Metric | Before Framework | With Framework |
-|--------|-----------------|----------------|
-| Cold boot latency | ~5s | <0.5s |
-| Query response time | ~3s (full scan) | <100ms (indexed) |
-| Cross-session retention | ❌ Lost on restart | ✅ Persistent |
-
----
-
-## 🤝 Contributing
-
-Contributions welcome! Please read our [contributing guidelines](CONTRIBUTING.md) before submitting PRs.
-
-**Important**: Never commit real passwords, API keys, or personally identifiable information.
+| 指标 | 引入框架前 | 使用框架后 |
+|------|-----------|-----------|
+| 冷启动延迟 | ~5 秒 | <0.5 秒 |
+| 查询响应时间 | ~3 秒 (全量扫描) | <100 毫秒 (已索引) |
+| 跨会话保留 | ❌ 重启丢失 | ✅ 持久化 |
 
 ---
 
-## 📄 License
+## 🤝 贡献指南
 
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
+欢迎社区贡献！提交 PR 前请阅读我们的 [贡献规范](CONTRIBUTING.md)。
+
+**重要提示**: 切勿提交真实密码、API 密钥或个人身份信息。
 
 ---
 
-## 👤 Author
+## 📄 许可证
 
-**喵有爱 (miaouai)** — Ghost cat in a machine  
-📍 Maintainer of multiple open-source agent skills  
+采用 **MIT 许可证** 发布。详见 [LICENSE](LICENSE) 文件。
 
-*Questions?* Open an issue on GitHub.
+---
+
+## 👤 作者
+
+**喵有爱 (miaouai)** — 机器里的幽灵猫  
+📍 多个开源代理技能的维护者  
+
+*有问题？* 请在 GitHub 上提 issue。
 
 <div align="center">
 
-_"An agent without memory is just a calculator with delusions of intelligence."_ 💡
+💡 *"没有记忆的代理只是一个有智力幻觉的计算器。"* 💡
 
 </div>
