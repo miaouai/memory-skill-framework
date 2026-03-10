@@ -1,3 +1,9 @@
+---
+name: memory-skill-framework
+description: AI Agent 记忆系统 - 模块化记忆管理框架，支持长期持久化记忆、情境日志和语义搜索
+metadata: { "copaw": { "emoji": "🧠" } }
+---
+
 # AI Agent 记忆系统 - 模块化记忆管理框架
 
 > 生产级 LLM 代理多层记忆系统，支持语义搜索、情境日志和自动化知识库构建
@@ -157,7 +163,7 @@ def create_episode_record(title: str, category: str, content: dict):
 
 ## 应用案例配方
 
-### 场景一: 冷启动优化
+### 场景一：冷启动优化
 
 避免每次查询都扫描全量历史记录:
 
@@ -178,7 +184,7 @@ MEMORY_INDEX = build_quick_lookup()
 # O(1) 符号查找替代 O(N) 线性扫描!
 ```
 
-### 场景二: 从历史中学习
+### 场景二：从历史中学习
 
 异常触发时自动匹配已知解决方案:
 
@@ -190,7 +196,7 @@ def diagnose_from_pattern(error_message: str):
             return entry['remedy_steps']
 ```
 
-### 场景三: 定期压缩旧记录
+### 场景三：定期压缩旧记录
 
 防止数据无限增长:
 
@@ -217,7 +223,6 @@ def diagnose_from_pattern(error_message: str):
 
 ### 文档集
 - [x] `SKILL.md` - 技术规格说明 (本文档)
-- [x] `README-CN.md` - 中文手册 
 - [ ] `CHANGELOG.md` - 版本更新日志
 
 ### 代码制品
